@@ -1,0 +1,8 @@
+{
+  "name": "mtoreai-business-hub",
+  "version": "1.0.0",
+  "description": "MTOREAI Business Hub - Netlify Functions",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
