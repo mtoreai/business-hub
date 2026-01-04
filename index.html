@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- Primary Meta Tags -->
+  <title>MTOREAI Business Hub - AI Advisory Team for Your Business</title>
+  <meta name="title" content="MTOREAI Business Hub - Your Complete AI Business Advisory Team" />
+  <meta name="description" content="Connect with specialized AI advisors who help you organize, systematize, scale, and access funding. From credit building to automation, marketing to wellness - your complete business support ecosystem." />
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+    
+    :root{
+      --bg:#080d18;
+      --card:#0d1425;
+      --text:#e9f0ff;
+      --muted:#a9b7d7;
+      --line:rgba(255,255,255,.12);
+      --shadow: 0 20px 60px rgba(0,0,0,.5);
+      --week:#00d1ff;
+      --work:#28f0a2;
+      --accent:#8a5cff;
+      --urgent:#ff4d6d;
+      --warning:#ffcc00;
+      --radius:20px;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: 
+        radial-gradient(ellipse 1400px 900px at 20% 0%, rgba(40,240,162,.12), transparent 50%),
+        radial-gradient(ellipse 1400px 900px at 80% 10%, rgba(0,209,255,.12), transparent 50%),
+        radial-gradient(ellipse 1400px 900px at 50% 100%, rgba(138,92,255,.08), transparent 50%),
+        var(--bg);
+      background-size: 200% 200%;
+      animation: gradientShift 20s ease infinite;
+      color:var(--text);
+      min-height:100vh;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(40,240,162,.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0,209,255,.03) 0%, transparent 50%);
+      pointer-events: none;
+      animation: glow 8s ease-in-out infinite;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .logo-container {
+      width:80px;
+      height:80px;
+      border-radius:20px;
+      border:2px solid rgba(255,255,255,.2);
+      background:
+        radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+        linear-gradient(135deg, rgba(0,209,255,.55), rgba(40,240,162,.35));
+      box-shadow: 0 0 40px rgba(0,209,255,.4), 0 0 60px rgba(40,240,162,.3);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 0 auto 24px;
+      animation: float 3s ease-in-out infinite;
+      overflow: hidden;
+    }
+    
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1{
+      font-size:42px;
+      line-height:1.1;
+      letter-spacing:-.8px;
+      font-weight:900;
+      background: linear-gradient(135deg, var(--text), var(--week));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom:16px;
+    }
+
+    .hero-subtitle {
+      font-size:20px;
+      font-weight:700;
+      color:var(--text);
+      line-height:1.4;
+      margin-bottom:12px;
+    }
+    
+    .hero-description {
+      font-size:16px;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+      max-width:700px;
+      margin:0 auto 32px;
+    }
+
+    .cta-primary {
+      display:inline-block;
+      padding:18px 40px;
+      background: linear-gradient(135deg, var(--work), var(--week));
+      border:none;
+      border-radius:14px;
+      color:#000;
+      font-weight:900;
+      font-size:16px;
+      text-decoration:none;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      box-shadow: 0 0 30px rgba(40,240,162,.4), 0 4px 15px rgba(0,0,0,.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(40,240,162,.6), 0 6px 20px rgba(0,0,0,.4);
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      backdrop-filter: blur(20px);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:40px 32px;
+      margin-bottom:48px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .section-title {
+      font-size:28px;
+      font-weight:900;
+      text-align:center;
+      margin-bottom:32px;
+      background: linear-gradient(135deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .steps {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap:24px;
+    }
+
+    .step {
+      text-align:center;
+      padding:24px;
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      transition: all 0.3s ease;
+    }
+
+    .step:hover {
+      background: rgba(0,209,255,.08);
+      border-color: rgba(0,209,255,.3);
+      transform: translateY(-4px);
+    }
+
+    .step-number {
+      font-size:48px;
+      font-weight:900;
+      background: linear-gradient(135deg, var(--week), var(--work));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom:12px;
+    }
+
+    .step-title {
+      font-size:18px;
+      font-weight:800;
+      color:var(--text);
+      margin-bottom:8px;
+    }
+
+    .step-desc {
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.5;
+      font-weight:600;
+    }
+
+    /* CHATBOTS SECTION */
+    .chatbots-section {
+      margin-bottom:48px;
+    }
+
+    .category {
+      margin-bottom:48px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .category-header {
+      text-align:center;
+      margin-bottom:32px;
+    }
+
+    .category-title {
+      font-size:32px;
+      font-weight:900;
+      margin-bottom:8px;
+    }
+
+    .category-business .category-title {
+      background: linear-gradient(135deg, var(--week), var(--work));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .category-personal .category-title {
+      background: linear-gradient(135deg, var(--accent), var(--urgent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .category-desc {
+      font-size:15px;
+      color:var(--muted);
+      font-weight:600;
+    }
+
+    .bot-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap:20px;
+    }
+
+    .bot-card {
+      background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      backdrop-filter: blur(20px);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:24px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .bot-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--week), var(--work));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .bot-card:hover::before {
+      opacity: 1;
+    }
+
+    .bot-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 40px rgba(0,209,255,.3);
+      border-color: rgba(0,209,255,.4);
+    }
+
+    .bot-icon {
+      font-size:48px;
+      margin-bottom:16px;
+      display:block;
+    }
+
+    .bot-name {
+      font-size:20px;
+      font-weight:900;
+      color:var(--text);
+      margin-bottom:12px;
+      line-height:1.2;
+    }
+
+    .bot-purpose {
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.5;
+      margin-bottom:16px;
+      font-weight:600;
+    }
+
+    .bot-badge {
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      margin-top:8px;
+    }
+
+    .badge-gateway {
+      background: rgba(255,204,0,.2);
+      color: var(--warning);
+      border:1px solid var(--warning);
+    }
+
+    .badge-credit {
+      background: rgba(40,240,162,.2);
+      color: var(--work);
+      border:1px solid var(--work);
+    }
+
+    .badge-funding {
+      background: rgba(0,209,255,.2);
+      color: var(--week);
+      border:1px solid var(--week);
+    }
+
+    .badge-strategy {
+      background: rgba(138,92,255,.2);
+      color: var(--accent);
+      border:1px solid var(--accent);
+    }
+
+    .badge-automation {
+      background: rgba(0,209,255,.2);
+      color: var(--week);
+      border:1px solid var(--week);
+    }
+
+    .badge-marketing {
+      background: rgba(255,122,0,.2);
+      color: #ff7a00;
+      border:1px solid #ff7a00;
+    }
+
+    .badge-wellness {
+      background: rgba(255,77,109,.2);
+      color: var(--urgent);
+      border:1px solid var(--urgent);
+    }
+
+    .badge-personal {
+      background: rgba(138,92,255,.2);
+      color: var(--accent);
+      border:1px solid var(--accent);
+    }
+
+    /* ACCESS SECTION */
+    .access-section {
+      background: linear-gradient(135deg, rgba(40,240,162,.12), rgba(0,209,255,.08));
+      backdrop-filter: blur(20px);
+      border:2px solid var(--work);
+      border-radius: var(--radius);
+      box-shadow: 0 0 50px rgba(40,240,162,.3);
+      padding:48px 32px;
+      text-align:center;
+      margin-bottom:48px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .access-title {
+      font-size:32px;
+      font-weight:900;
+      margin-bottom:16px;
+      color:var(--text);
+    }
+
+    .access-desc {
+      font-size:16px;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+      max-width:600px;
+      margin:0 auto 32px;
+    }
+
+    .access-form {
+      max-width:500px;
+      margin:0 auto;
+      display:flex;
+      gap:12px;
+    }
+
+    .access-input {
+      flex:1;
+      padding:16px 20px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.2);
+      border-radius:12px;
+      color:var(--text);
+      font-size:15px;
+      font-weight:600;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .access-input::placeholder {
+      color:var(--muted);
+    }
+
+    .access-input:focus {
+      outline:none;
+      border-color:var(--work);
+      background: rgba(255,255,255,.12);
+    }
+
+    .access-btn {
+      padding:16px 32px;
+      background: linear-gradient(135deg, var(--work), var(--week));
+      border:none;
+      border-radius:12px;
+      color:#000;
+      font-weight:900;
+      font-size:15px;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      white-space:nowrap;
+    }
+
+    .access-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(40,240,162,.5);
+    }
+
+    /* BROKER SECTION */
+    .broker-section {
+      background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      backdrop-filter: blur(20px);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:48px 32px;
+      text-align:center;
+      margin-bottom:48px;
+      animation: fadeInUp 1.4s ease-out;
+    }
+
+    .broker-title {
+      font-size:28px;
+      font-weight:900;
+      margin-bottom:16px;
+      background: linear-gradient(135deg, var(--accent), var(--week));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .broker-desc {
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+      max-width:700px;
+      margin:0 auto 24px;
+    }
+
+    .broker-cta {
+      display:inline-block;
+      padding:14px 32px;
+      background: linear-gradient(135deg, var(--accent), var(--week));
+      border:none;
+      border-radius:12px;
+      color:#000;
+      font-weight:800;
+      font-size:14px;
+      text-decoration:none;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .broker-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(138,92,255,.5);
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align:center;
+      padding:32px 20px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:600;
+      border-top:1px solid var(--line);
+    }
+
+    .footer-links {
+      margin-bottom:16px;
+    }
+
+    .footer-link {
+      color:var(--week);
+      text-decoration:none;
+      margin:0 12px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color:var(--work);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      h1 {
+        font-size:32px;
+      }
+      .hero-subtitle {
+        font-size:18px;
+      }
+      .bot-grid {
+        grid-template-columns: 1fr;
+      }
+      .access-form {
+        flex-direction:column;
+      }
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* CHAT MODAL */
+    .chat-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .chat-modal.active {
+      display: flex;
+    }
+
+    .chat-container {
+      background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 0 60px rgba(0,209,255,.4);
+      width: 100%;
+      max-width: 600px;
+      max-height: 700px;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.3s ease-out;
+    }
+
+    .chat-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .chat-close {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .chat-close:hover {
+      background: rgba(255,77,109,.2);
+      border-color: var(--urgent);
+      color: var(--urgent);
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chat-message {
+      padding: 14px 16px;
+      border-radius: 12px;
+      max-width: 80%;
+      line-height: 1.5;
+      font-size: 14px;
+      animation: fadeInUp 0.3s ease-out;
+    }
+
+    .chat-message.user {
+      background: linear-gradient(135deg, var(--week), var(--work));
+      color: #000;
+      font-weight: 600;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .chat-message.assistant {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      color: var(--text);
+      align-self: flex-start;
+    }
+
+    .chat-message.loading {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      font-style: italic;
+      align-self: flex-start;
+    }
+
+    .chat-input-area {
+      padding: 20px 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 12px;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      resize: none;
+      min-height: 44px;
+      max-height: 120px;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--week);
+      background: rgba(255,255,255,.08);
+    }
+
+    .chat-input::placeholder {
+      color: var(--muted);
+    }
+
+    .chat-send {
+      padding: 0 20px;
+      background: linear-gradient(135deg, var(--week), var(--work));
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .chat-send:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0,209,255,.4);
+    }
+
+    .chat-send:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .demo-notice {
+      background: rgba(255,204,0,.15);
+      border: 1px solid var(--warning);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 600;
+      text-align: center;
+      margin: 16px 24px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    
+    <!-- HERO -->
+    <section class="hero">
+      <div class="logo-container">
+        <img src="../logo.png" alt="MTOREAI" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:32px;font-weight:900;color:#000\'>AI</span>';" />
+      </div>
+      <h1>MTOREAI Business Hub</h1>
+      <div class="hero-subtitle">Your Complete AI Advisory Team</div>
+      <div class="hero-description">
+        Connect with specialized AI advisors who help you organize, systematize, scale, and access funding when ready. From credit building to automation, marketing to wellness—your complete business support ecosystem.
+      </div>
+      <a href="#access" class="cta-primary">Request Early Access</a>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-title">Start with Master Qualifier</div>
+          <div class="step-desc">Quick assessment identifies your needs and matches you with the right specialist advisors</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-title">Connect with Your Team</div>
+          <div class="step-desc">Chat with specialized advisors who understand your situation and provide actionable guidance</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-title">Build & Scale</div>
+          <div class="step-desc">Implement systems, build credit, scale operations, and access funding when you're ready</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUSINESS ADVISORS -->
+    <section class="chatbots-section">
+      <div class="category category-business">
+        <div class="category-header">
+          <h2 class="category-title">Business Advisory Team</h2>
+          <p class="category-desc">Specialized advisors for every aspect of building and scaling your business</p>
+        </div>
+        
+        <div class="bot-grid">
+          <!-- Master Qualifier -->
+          <div class="bot-card" onclick="openChat('master-qualifier', 'Master Qualifier')">
+            <span class="bot-icon">🎯</span>
+            <div class="bot-name">Master Qualifier</div>
+            <div class="bot-purpose">Your gateway to the ecosystem. Assesses your needs, qualifies you for funding, and connects you with the right specialist advisors.</div>
+            <span class="bot-badge badge-gateway">Gateway</span>
+          </div>
+
+          <!-- Business Credit Building -->
+          <div class="bot-card" onclick="openChat('business-credit', 'Business Credit Builder')">
+            <span class="bot-icon">🏢</span>
+            <div class="bot-name">Business Credit Builder</div>
+            <div class="bot-purpose">Build rock-solid business credit that unlocks better funding, higher limits, and stronger financial foundations.</div>
+            <span class="bot-badge badge-credit">Credit</span>
+          </div>
+
+          <!-- Business Loan Guide -->
+          <div class="bot-card" onclick="openChat('business-loan', 'Business Loan Guide')">
+            <span class="bot-icon">💰</span>
+            <div class="bot-name">Business Loan Guide</div>
+            <div class="bot-purpose">Navigate funding options and match you with lenders. Get approved for capital that grows your business.</div>
+            <span class="bot-badge badge-funding">Funding</span>
+          </div>
+
+          <!-- Business Profile Mentor -->
+          <div class="bot-card" onclick="openChat('business-profile', 'Business Profile Mentor')">
+            <span class="bot-icon">🎨</span>
+            <div class="bot-name">Business Profile Mentor</div>
+            <div class="bot-purpose">Strategic positioning and business clarity. Align your business with your authentic self for sustainable success.</div>
+            <span class="bot-badge badge-strategy">Strategy</span>
+          </div>
+
+          <!-- Automation Advisor -->
+          <div class="bot-card" onclick="openChat('automation-advisor', 'Automation Advisor')">
+            <span class="bot-icon">⚙️</span>
+            <div class="bot-name">Automation Advisor</div>
+            <div class="bot-purpose">Design workflows and systems that free your time and scale your operations efficiently.</div>
+            <span class="bot-badge badge-automation">Automation</span>
+          </div>
+
+          <!-- Automation Stack Builder -->
+          <div class="bot-card" onclick="openChat('automation-stack', 'Automation Stack Builder')">
+            <span class="bot-icon">🔧</span>
+            <div class="bot-name">Automation Stack Builder</div>
+            <div class="bot-purpose">Implementation specialist. Turn automation strategies into working systems that save 15-20 hours per week.</div>
+            <span class="bot-badge badge-automation">Implementation</span>
+          </div>
+
+          <!-- Marketing Chat -->
+          <div class="bot-card" onclick="openChat('marketing-advisor', 'Marketing Advisor')">
+            <span class="bot-icon">📢</span>
+            <div class="bot-name">Marketing Advisor</div>
+            <div class="bot-purpose">Complete marketing strategy from lead generation to customer acquisition. Make your marketing actually work.</div>
+            <span class="bot-badge badge-marketing">Marketing</span>
+          </div>
+
+          <!-- Content Creator -->
+          <div class="bot-card" onclick="openChat('content-creator', 'Content Creator')">
+            <span class="bot-icon">📱</span>
+            <div class="bot-name">Content Creator</div>
+            <div class="bot-purpose">Create content that brings in customers. Strategic content calendars and platform guidance that converts.</div>
+            <span class="bot-badge badge-marketing">Content</span>
+          </div>
+
+          <!-- Business Mental Clarity -->
+          <div class="bot-card" onclick="openChat('mental-clarity', 'Business & Personal Mental Clarity')">
+            <span class="bot-icon">🧘</span>
+            <div class="bot-name">Business & Personal Mental Clarity</div>
+            <div class="bot-purpose">Wellness support for entrepreneurs. Stay grounded, manage stress, and maintain clarity while building your empire.</div>
+            <span class="bot-badge badge-wellness">Wellness</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PERSONAL ADVISORS -->
+      <div class="category category-personal">
+        <div class="category-header">
+          <h2 class="category-title">Personal Growth Team</h2>
+          <p class="category-desc">Support for your personal journey alongside your business growth</p>
+        </div>
+        
+        <div class="bot-grid">
+          <!-- Personal Credit Builder -->
+          <div class="bot-card" onclick="openChat('personal-credit', 'Personal Credit Builder')">
+            <span class="bot-icon">💳</span>
+            <div class="bot-name">Personal Credit Builder</div>
+            <div class="bot-purpose">Fix credit errors, remove outdated items, and build strong personal credit using insider strategies.</div>
+            <span class="bot-badge badge-personal">Credit Repair</span>
+          </div>
+
+          <!-- Rewrite Me -->
+          <div class="bot-card" onclick="alert('Rewrite Me will be available soon. This bot provides emotional support and wellness guidance for your personal journey.')">
+            <span class="bot-icon">🌿</span>
+            <div class="bot-name">Rewrite Me</div>
+            <div class="bot-purpose">Emotional support, journaling companion, and wellness guide. Stay emotionally grounded through your journey.</div>
+            <span class="bot-badge badge-personal">Wellness</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESS SECTION -->
+    <section class="access-section" id="access">
+      <h2 class="access-title">Ready to Transform Your Business?</h2>
+      <p class="access-desc">
+        The Business Hub is currently in proof-of-concept phase. Request early access to be among the first to experience your complete AI advisory team.
+      </p>
+      <form class="access-form" id="accessForm">
+        <input type="email" class="access-input" placeholder="Enter your email" required />
+        <button type="submit" class="access-btn">Request Access</button>
+      </form>
+    </section>
+
+    <!-- BROKER SECTION -->
+    <section class="broker-section">
+      <h2 class="broker-title">Brokers & Partners</h2>
+      <p class="broker-desc">
+        Interested in white-labeling the Business Hub for your clients? We offer complete branding customization and backend support so you can offer this powerful ecosystem under your own brand.
+      </p>
+      <a href="mailto:support@mtoreai.solutions?subject=Business%20Hub%20Partner%20Inquiry" class="broker-cta">Partner Inquiry</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="https://mtoreai.solutions" class="footer-link">Main Site</a>
+        <a href="mailto:support@mtoreai.solutions" class="footer-link">Contact</a>
+        <a href="https://linkedin.com/company/mtoreai/" class="footer-link">LinkedIn</a>
+      </div>
+      <div>© <span id="year"></span> MTOREAI • Business Hub</div>
+    </footer>
+
+  </div>
+
+  <!-- CHAT MODAL -->
+  <div class="chat-modal" id="chatModal">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-title" id="chatTitle">Master Qualifier</div>
+        <div class="chat-close" onclick="closeChat()">×</div>
+      </div>
+      
+      <div class="demo-notice">
+        <strong>⚠️ Demo Mode:</strong> Chat functionality requires Netlify deployment. <a href="#access" style="color:var(--work);font-weight:800;">Request access</a> to try it live.
+      </div>
+      
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-message assistant">
+          Welcome! I'm ready to help. Click a chatbot card to start a conversation.
+        </div>
+      </div>
+      
+      <div class="chat-input-area">
+        <textarea 
+          class="chat-input" 
+          id="chatInput" 
+          placeholder="Type your message..."
+          rows="1"
+          onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendMessage();}"
+        ></textarea>
+        <button class="chat-send" onclick="sendMessage()" id="sendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    
+    // Chat state
+    let currentBot = null;
+    let currentThread = null;
+    let isProcessing = false;
+    
+    // Email capture form
+    document.getElementById('accessForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input').value;
+      
+      // For now, just show success (you'll connect to n8n webhook later)
+      alert('Thank you! We\'ll notify you at ' + email + ' when early access opens.');
+      this.reset();
+      
+      // TODO: Send to n8n webhook
+      // fetch('YOUR_N8N_WEBHOOK_URL', {
+      //   method: 'POST',
+      //   headers: {'Content-Type': 'application/json'},
+      //   body: JSON.stringify({email: email, timestamp: new Date().toISOString()})
+      // });
+    });
+    
+    // Open chat modal
+    function openChat(botId, botName) {
+      currentBot = botId;
+      currentThread = null; // Reset thread for new conversation
+      document.getElementById('chatTitle').textContent = botName;
+      document.getElementById('chatModal').classList.add('active');
+      document.getElementById('chatMessages').innerHTML = '<div class="chat-message assistant">Hi! I\'m ' + botName + '. How can I help you today?</div>';
+      document.getElementById('chatInput').value = '';
+      document.getElementById('chatInput').focus();
+    }
+    
+    // Close chat modal
+    function closeChat() {
+      document.getElementById('chatModal').classList.remove('active');
+      currentBot = null;
+      currentThread = null;
+    }
+    
+    // Close modal on background click
+    document.getElementById('chatModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeChat();
+      }
+    });
+    
+    // Send message
+    async function sendMessage() {
+      if (isProcessing) return;
+      
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      // Add user message to chat
+      appendMessage(message, 'user');
+      input.value = '';
+      
+      // Auto-resize textarea
+      input.style.height = 'auto';
+      
+      // Show loading
+      isProcessing = true;
+      document.getElementById('sendBtn').disabled = true;
+      const loadingMsg = appendMessage('Thinking...', 'loading');
+      
+      try {
+        // DEMO MODE: Show simulated response
+        // When deployed to Netlify, this will call the actual function
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        loadingMsg.remove();
+        
+        // Check if we're in production (has Netlify functions)
+        if (window.location.hostname.includes('netlify.app') || window.location.hostname.includes('mtoreai.solutions')) {
+          // Call actual Netlify function
+          const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              message: message,
+              threadId: currentThread
+            })
+          });
+          
+          const data = await response.json();
+          currentThread = data.threadId;
+          appendMessage(data.response, 'assistant');
+        } else {
+          // Demo mode - show sample response
+          appendMessage('This is a demo response. Once deployed to Netlify, your actual AI advisors will respond here with personalized guidance based on your specific situation. Request early access to try the live version!', 'assistant');
+        }
+        
+      } catch (error) {
+        loadingMsg.remove();
+        appendMessage('Sorry, there was an error. Please try again or request access to the live version.', 'assistant');
+        console.error('Chat error:', error);
+      } finally {
+        isProcessing = false;
+        document.getElementById('sendBtn').disabled = false;
+        input.focus();
+      }
+    }
+    
+    // Append message to chat
+    function appendMessage(text, type) {
+      const messagesContainer = document.getElementById('chatMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${type}`;
+      messageDiv.textContent = text;
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      return messageDiv;
+    }
+    
+    // Auto-resize textarea
+    document.getElementById('chatInput').addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+  </script>
+</body>
+</html>
