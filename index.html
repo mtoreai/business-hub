@@ -922,14 +922,14 @@
       <p class="broker-desc">
         Interested in white-labeling the Business Hub for your clients? We offer complete branding customization and backend support so you can offer this powerful ecosystem under your own brand.
       </p>
-      <a href="/cdn-cgi/l/email-protection#40333530302f3234002d342f322521296e332f2c3534292f2e337f3335222a2523347d023533292e253333657270083522657270102132342e2532657270092e3135293239" class="broker-cta">Partner Inquiry</a>
+      <a href="/cdn-cgi/l/email-protection#186b6d6868776a6c58756c776a7d7971366b77746d6c7177766b276b6d7a727d7b6c255a6d6b71767d6b6b3d2a28506d7a3d2a2848796a6c767d6a3d2a285176696d716a61" class="broker-cta">Partner Inquiry</a>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-links">
         <a href="https://mtoreai.solutions" class="footer-link">Main Site</a>
-        <a href="/cdn-cgi/l/email-protection#691a1c1919061b1d29041d061b0c0800471a06051c1d0006071a" class="footer-link">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#7b080e0b0b14090f3b160f14091e1a12550814170e0f12141508" class="footer-link">Contact</a>
         <a href="https://linkedin.com/company/mtoreai/" class="footer-link">LinkedIn</a>
       </div>
       <div>© <span id="year"></span> MTOREAI • Business Hub</div>
@@ -968,8 +968,7 @@
       </div>
     </div>
   </div>
-
-  <script>
+<script>
     document.getElementById("year").textContent = new Date().getFullYear();
     
     // Chat state
@@ -1036,32 +1035,43 @@
   const loadingMsg = appendMessage('Thinking...', 'loading');
 
   try {
-    // Always try backend call
-    const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message,
-        threadId: currentThread
-      })
-    });
+    const isLive =
+      window.location.hostname.endsWith('netlify.app') ||
+      window.location.hostname.endsWith('mtoreai.solutions');
 
-    if (!response.ok) {
-      throw new Error('Backend error');
+    if (isLive) {
+      const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message,
+          threadId: currentThread
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Backend error');
+      }
+
+      // ✅ Hide demo notice once backend responds
+      const demoNotice = document.getElementById('demoNotice');
+      if (demoNotice) demoNotice.style.display = 'none';
+
+      const data = await response.json();
+      currentThread = data.threadId;
+      appendMessage(data.response, 'assistant');
+
+    } else {
+      appendMessage(
+        'This is a demo response. Deploy to Netlify to activate live AI.',
+        'assistant'
+      );
     }
-
-    // ✅ Hide demo notice once backend responds successfully
-    const demoNotice = document.getElementById('demoNotice');
-    if (demoNotice) demoNotice.style.display = 'none';
-
-    const data = await response.json();
-    currentThread = data.threadId;
-    appendMessage(data.response, 'assistant');
 
   } catch (error) {
     console.error('Chat error:', error);
     appendMessage(
-      'Sorry, there was an error connecting to the AI service. Please try again.',
+      'Sorry, there was an error connecting to the AI service.',
       'assistant'
     );
   } finally {
@@ -1083,3 +1093,11 @@
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
       return messageDiv;
     }
+    // Auto-resize textarea
+    document.getElementById('chatInput').addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+  </script>
+</body>
+</html>
