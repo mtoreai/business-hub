@@ -966,138 +966,85 @@
         ></textarea>
         <button class="chat-send" onclick="sendMessage()" id="sendBtn">Send</button>
       </div>
-    </div>
-  </div>
+     </div>
+</div>
+
 <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    
-    // Chat state
-    let currentBot = null;
-    let currentThread = null;
-    let isProcessing = false;
-    
-    // Email capture form
-    document.getElementById('accessForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = this.querySelector('input').value;
-      
-      // For now, just show success (you'll connect to n8n webhook later)
-      alert('Thank you! We\'ll notify you at ' + email + ' when early access opens.');
-      this.reset();
-      
-      // TODO: Send to n8n webhook
-      // fetch('YOUR_N8N_WEBHOOK_URL', {
-      //   method: 'POST',
-      //   headers: {'Content-Type': 'application/json'},
-      //   body: JSON.stringify({email: email, timestamp: new Date().toISOString()})
-      // });
-    });
-    
-    // Open chat modal
-    function openChat(botId, botName) {
-      currentBot = botId;
-      currentThread = null; // Reset thread for new conversation
-      document.getElementById('chatTitle').textContent = botName;
-      document.getElementById('chatModal').classList.add('active');
-      document.getElementById('chatMessages').innerHTML = '<div class="chat-message assistant">Hi! I\'m ' + botName + '. How can I help you today?</div>';
-      document.getElementById('chatInput').value = '';
-      document.getElementById('chatInput').focus();
-    }
-    
-    // Close chat modal
-    function closeChat() {
-      document.getElementById('chatModal').classList.remove('active');
-      currentBot = null;
-      currentThread = null;
-    }
-    
-    // Close modal on background click
-    document.getElementById('chatModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeChat();
-      }
-    });
-    
-    // Send message
-    async function sendMessage() {
-  if (isProcessing) return;
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-  const input = document.getElementById('chatInput');
-  const message = input.value.trim();
-  if (!message) return;
+  // Chat state
+  let currentBot = null;
+  let currentThread = null;
+  let isProcessing = false;
 
-  appendMessage(message, 'user');
-  input.value = '';
-  input.style.height = 'auto';
+  // Email capture form
+  document.getElementById('accessForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input').value;
 
-  isProcessing = true;
-  document.getElementById('sendBtn').disabled = true;
-  const loadingMsg = appendMessage('Thinking...', 'loading');
+    alert('Thank you! We\'ll notify you at ' + email + ' when early access opens.');
+    this.reset();
+  });
 
-  try {
-    const isLive =
-      window.location.hostname.endsWith('netlify.app') ||
-      window.location.hostname.endsWith('mtoreai.solutions');
+  function openChat(botId, botName) {
+    currentBot = botId;
+    currentThread = null;
+    document.getElementById('chatTitle').textContent = botName;
+    document.getElementById('chatModal').classList.add('active');
+    document.getElementById('chatMessages').innerHTML =
+      `<div class="chat-message assistant">
+        Hi! I'm ${botName}. How can I help you today?
+      </div>`;
+    document.getElementById('chatInput').value = '';
+    document.getElementById('chatInput').focus();
+  }
 
-    if (isLive) {
-      const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message,
-          threadId: currentThread
-        })
-      });
+  function closeChat() {
+    document.getElementById('chatModal').classList.remove('active');
+    currentBot = null;
+    currentThread = null;
+  }
 
-      if (!response.ok) {
-        throw new Error('Backend error');
-      }
+  document.getElementById('chatModal').addEventListener('click', function(e) {
+    if (e.target === this) closeChat();
+  });
 
-      // ✅ Hide demo notice once backend responds
-      const demoNotice = document.getElementById('demoNotice');
-      if (demoNotice) demoNotice.style.display = 'none';
+  async function sendMessage() {
+    if (isProcessing) return;
 
-      const data = await response.json();
-      currentThread = data.threadId;
-      appendMessage(data.response, 'assistant');
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    if (!message) return;
 
-    } else {
+    appendMessage(message, 'user');
+    input.value = '';
+
+    isProcessing = true;
+    document.getElementById('sendBtn').disabled = true;
+    const loadingMsg = appendMessage('Thinking...', 'loading');
+
+    try {
       appendMessage(
-        'This is a demo response. Deploy to Netlify to activate live AI.',
+        'This is a demo response. Deploy functions to enable live AI.',
         'assistant'
       );
+    } finally {
+      loadingMsg.remove();
+      isProcessing = false;
+      document.getElementById('sendBtn').disabled = false;
     }
-
-  } catch (error) {
-    console.error('Chat error:', error);
-    appendMessage(
-      'Sorry, there was an error connecting to the AI service.',
-      'assistant'
-    );
-  } finally {
-    loadingMsg.remove();
-    isProcessing = false;
-    document.getElementById('sendBtn').disabled = false;
-    input.focus();
   }
-}
 
-    
-    // Append message to chat
-    function appendMessage(text, type) {
-      const messagesContainer = document.getElementById('chatMessages');
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `chat-message ${type}`;
-      messageDiv.textContent = text;
-      messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      return messageDiv;
-    }
-    // Auto-resize textarea
-    document.getElementById('chatInput').addEventListener('input', function () {
-      this.style.height = 'auto';
-      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-    });
-  </script>
+  function appendMessage(text, type) {
+    const container = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = `chat-message ${type}`;
+    div.textContent = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+    return div;
+  }
+</script>
+
 </body>
 </html>
