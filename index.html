@@ -922,14 +922,14 @@
       <p class="broker-desc">
         Interested in white-labeling the Business Hub for your clients? We offer complete branding customization and backend support so you can offer this powerful ecosystem under your own brand.
       </p>
-      <a href="mailto:support@mtoreai.solutions?subject=Business%20Hub%20Partner%20Inquiry" class="broker-cta">Partner Inquiry</a>
+      <a href="/cdn-cgi/l/email-protection#40333530302f3234002d342f322521296e332f2c3534292f2e337f3335222a2523347d023533292e253333657270083522657270102132342e2532657270092e3135293239" class="broker-cta">Partner Inquiry</a>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-links">
         <a href="https://mtoreai.solutions" class="footer-link">Main Site</a>
-        <a href="mailto:support@mtoreai.solutions" class="footer-link">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#691a1c1919061b1d29041d061b0c0800471a06051c1d0006071a" class="footer-link">Contact</a>
         <a href="https://linkedin.com/company/mtoreai/" class="footer-link">LinkedIn</a>
       </div>
       <div>© <span id="year"></span> MTOREAI • Business Hub</div>
@@ -945,9 +945,10 @@
         <div class="chat-close" onclick="closeChat()">×</div>
       </div>
       
-      <div class="demo-notice">
-        <strong>⚠️ Demo Mode:</strong> Chat functionality requires Netlify deployment. <a href="#access" style="color:var(--work);font-weight:800;">Request access</a> to try it live.
-      </div>
+      <div class="demo-notice" id="demoNotice">
+  <strong>⚠️ Demo Mode:</strong> Chat functionality requires Netlify deployment.
+</div>
+
       
       <div class="chat-messages" id="chatMessages">
         <div class="chat-message assistant">
@@ -968,7 +969,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.getElementById("year").textContent = new Date().getFullYear();
     
     // Chat state
@@ -1020,62 +1021,57 @@
     
     // Send message
     async function sendMessage() {
-      if (isProcessing) return;
-      
-      const input = document.getElementById('chatInput');
-      const message = input.value.trim();
-      
-      if (!message) return;
-      
-      // Add user message to chat
-      appendMessage(message, 'user');
-      input.value = '';
-      
-      // Auto-resize textarea
-      input.style.height = 'auto';
-      
-      // Show loading
-      isProcessing = true;
-      document.getElementById('sendBtn').disabled = true;
-      const loadingMsg = appendMessage('Thinking...', 'loading');
-      
-      try {
-        // DEMO MODE: Show simulated response
-        // When deployed to Netlify, this will call the actual function
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        loadingMsg.remove();
-        
-        // Check if we're in production (has Netlify functions)
-        if (window.location.hostname.includes('netlify.app') || window.location.hostname.includes('mtoreai.solutions')) {
-          // Call actual Netlify function
-          const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              message: message,
-              threadId: currentThread
-            })
-          });
-          
-          const data = await response.json();
-          currentThread = data.threadId;
-          appendMessage(data.response, 'assistant');
-        } else {
-          // Demo mode - show sample response
-          appendMessage('This is a demo response. Once deployed to Netlify, your actual AI advisors will respond here with personalized guidance based on your specific situation. Request early access to try the live version!', 'assistant');
-        }
-        
-      } catch (error) {
-        loadingMsg.remove();
-        appendMessage('Sorry, there was an error. Please try again or request access to the live version.', 'assistant');
-        console.error('Chat error:', error);
-      } finally {
-        isProcessing = false;
-        document.getElementById('sendBtn').disabled = false;
-        input.focus();
-      }
+  if (isProcessing) return;
+
+  const input = document.getElementById('chatInput');
+  const message = input.value.trim();
+  if (!message) return;
+
+  appendMessage(message, 'user');
+  input.value = '';
+  input.style.height = 'auto';
+
+  isProcessing = true;
+  document.getElementById('sendBtn').disabled = true;
+  const loadingMsg = appendMessage('Thinking...', 'loading');
+
+  try {
+    // Always try backend call
+    const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        threadId: currentThread
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Backend error');
     }
+
+    // ✅ Hide demo notice once backend responds successfully
+    const demoNotice = document.getElementById('demoNotice');
+    if (demoNotice) demoNotice.style.display = 'none';
+
+    const data = await response.json();
+    currentThread = data.threadId;
+    appendMessage(data.response, 'assistant');
+
+  } catch (error) {
+    console.error('Chat error:', error);
+    appendMessage(
+      'Sorry, there was an error connecting to the AI service. Please try again.',
+      'assistant'
+    );
+  } finally {
+    loadingMsg.remove();
+    isProcessing = false;
+    document.getElementById('sendBtn').disabled = false;
+    input.focus();
+  }
+}
+
     
     // Append message to chat
     function appendMessage(text, type) {
@@ -1087,12 +1083,3 @@
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
       return messageDiv;
     }
-    
-    // Auto-resize textarea
-    document.getElementById('chatInput').addEventListener('input', function() {
-      this.style.height = 'auto';
-      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-    });
-  </script>
-</body>
-</html>
