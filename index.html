@@ -968,7 +968,6 @@
       </div>
      </div>
 </div>
-
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -1010,30 +1009,54 @@
   });
 
   async function sendMessage() {
-    if (isProcessing) return;
+  if (isProcessing) return;
 
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
-    if (!message) return;
+  const input = document.getElementById('chatInput');
+  const message = input.value.trim();
+  if (!message) return;
 
-    appendMessage(message, 'user');
-    input.value = '';
+  appendMessage(message, 'user');
+  input.value = '';
+  input.style.height = 'auto';
 
-    isProcessing = true;
-    document.getElementById('sendBtn').disabled = true;
-    const loadingMsg = appendMessage('Thinking...', 'loading');
+  isProcessing = true;
+  document.getElementById('sendBtn').disabled = true;
+  const loadingMsg = appendMessage('Thinking...', 'loading');
 
-    try {
-      appendMessage(
-        'This is a demo response. Deploy functions to enable live AI.',
-        'assistant'
-      );
-    } finally {
-      loadingMsg.remove();
-      isProcessing = false;
-      document.getElementById('sendBtn').disabled = false;
+  try {
+    const response = await fetch(`/.netlify/functions/chat-${currentBot}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        threadId: currentThread
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Netlify function error');
     }
+
+    const data = await response.json();
+    currentThread = data.threadId;
+
+    const demoNotice = document.getElementById('demoNotice');
+    if (demoNotice) demoNotice.style.display = 'none';
+
+    appendMessage(data.response, 'assistant');
+
+  } catch (err) {
+    appendMessage(
+      'Error connecting to AI service.',
+      'assistant'
+    );
+  } finally {
+    loadingMsg.remove();
+    isProcessing = false;
+    document.getElementById('sendBtn').disabled = false;
+    input.focus();
   }
+}
 
   function appendMessage(text, type) {
     const container = document.getElementById('chatMessages');
